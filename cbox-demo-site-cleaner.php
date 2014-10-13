@@ -9,22 +9,6 @@ Domain Path: /languages
 */
 
 function cbox_dsc_catch_clean_request() {
-	/*
-	if ( empty( $_GET['clean_site'] ) ) {
-		return;
-	}
-
-	if ( empty( $_GET['key'] ) ) {
-		return;
-	}
-
-	$key = urldecode( $_GET['key'] );
-
-	if ( ! defined( 'CBOX_DSC_KEY' ) || $key != CBOX_DSC_KEY ) {
-		return;
-	}
-	*/
-
 	// Only one chunk can run at a time.
 	$chunk_in_progress = get_site_option( 'cbox_dsc_chunk_in_progress' );
 	if ( ! empty( $chunk_in_progress ) ) {
@@ -53,7 +37,7 @@ function cbox_dsc_catch_clean_request() {
 
 	if ( cbox_dsc_clean() ) {
 		update_site_option( 'cbox_dsc_last_clean', time() );
-		delete_site_option( 'cbox_dsc_chunk_in_progress' );
+		delete_site_option( 'cbox_dsc_clean_in_progress' );
 	}
 
 	delete_site_option( 'cbox_dsc_chunk_in_progress', '1' );
